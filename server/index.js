@@ -4,6 +4,10 @@ import express from 'express';
 import cors from 'cors';
 import pkg from 'pg';
 
+const environment = process.env.NODE_ENV
+
+dotenv.config()
+
 const { Pool } = pkg;
 const port = 3001;
 
@@ -15,10 +19,10 @@ app.use(express.urlencoded({ extended: false }));
 const openDb = () => {
 const pool = new Pool({
     user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
     password: process.env.DB_PASSWORD,
-    host: 'localhost',
-    database: 'todo',
-    port: 5432,
+    port: process.env.DB_PORT,
 })
 return pool
 }

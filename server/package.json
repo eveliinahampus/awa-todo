@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "mocha *.test.js",
-    "devstart": "nodemon index.js"
+    "test": "NODE_ENV=test mocha *.test.js",
+    "devstart": "NODE_ENV=development nodemon index.js"
   },
   "keywords": [],
   "author": "",
