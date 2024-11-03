@@ -50,17 +50,21 @@ app.post('/create', async (req, res) => {
     });
 
 app.delete('/delete/:id', async (req, res) => {
-    const pool = openDb()
-    pool.query('DELETE FROM task WHERE id = $1', 
-       [id],
-       (error, result) => {
-           if (error) {
-               return res.status(500).json({ error: error.message });
-           }
-           return res.status(200).json({id: id});
-        }
-        );
-    });
+    const pool = openDb();
+    const id = req.params.id; // Extract id from request parameters
+    
+    pool.query(
+        'DELETE FROM task WHERE id = $1',
+        [id],
+        (error, result) => {
+            if (error) {
+                return res.status(500).json({ error: error.message });
+            }
+                return res.status(200).json({ id: id });
+         }
+     );
+});
+    
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
