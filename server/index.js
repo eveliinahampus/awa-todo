@@ -12,23 +12,27 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-
+const openDb = () => {
 const pool = new Pool({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     host: 'localhost',
     database: 'todo',
     port: 5432,
-});
+})
+return pool
+}
 
 
 app.get('/', async (req, res) => {
-    try {
-        const result = await pool.query('SELECT * FROM task');
-        res.status(200).json(result.rows);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
+    const pool = openDb()
+
+    pool.query('SELECT * FROM task', (error, result) => {
+        if (error) {
+            return res.status(500).json({ error: error.message });
+        }
+        return res.status(200).json(result.rows);
+    })
 });
 
 app.post('/create', async (req, res) => {
@@ -40,7 +44,7 @@ app.post('/create', async (req, res) => {
             if (error) {
                 return res.status(500).json({ error: error.message });
             }
-            return res.status(200).json(result.rows[0]);
+            return res.status(200).json({id: result.rows[0].id});
         }
         );
     });
