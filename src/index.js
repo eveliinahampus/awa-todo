@@ -1,17 +1,51 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { useEffect, useState } from 'react';
+import './App.css';
+import axios from 'axios';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const url = 'http://localhost:3001/';
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+function App() {
+  const [task, setTask] = useState('')
+  const [tasks, setTasks] = useState([])
+
+  useEffect(() => {
+    axios.get(url)
+      .then(response => {
+        setTasks(response.data)
+      }).catch(error => {
+        alert(error.response.data.error ? error.response.data.error : error)
+      })
+    }, []),
+
+    <ul>
+      {
+        tasks.map(item => (
+          <li key={item.id} > {item.description}
+            <button className='delete-button' onClick={() => deleteTask(item.id)}>
+              Delete
+            </button>
+          </li>
+        ))
+      }
+    </ul>
+
+    const addTask = () => {
+      axios.post(url + 'create', {
+        description: task
+      }).then(response => {
+        setTasks([...tasks,  {id:response.data.id, description: task}])
+        setTask('')
+      }).catch(error => {
+        alert(error.response.data.error ? error.response.data.error : error)
+      })
+    }
+
+    const deleteTask = (id) => {
+      axios.delete(url + 'delete/' + id)
+        .then(response => {
+          const withoutRemoved = tasks.filter((item) => item.id !== id)
+          setTasks(withoutRemoved)
+        }).catch(error => {
+          alert(error.response.data.error ? error.response.data.error : error)
+          })
+          }}
