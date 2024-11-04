@@ -1,5 +1,6 @@
 import { pool } from '../helpers/db.js';
 import e, { Router } from 'express';
+import { auth } from '../helpers/auth.js';
 
 const router = Router();
 
@@ -12,7 +13,7 @@ router.get('/', async (req, res) => {
         });
 });
 
-router.post('/create', async (req, res) => {
+router.post('/create', auth, async (req, res) => {
             pool.query('INSERT INTO task (description) VALUES ($1) returning *',
                 [req.body.description],
                 (error, result) => {
@@ -23,7 +24,7 @@ router.post('/create', async (req, res) => {
                     });
         });
 
-router.delete('/delete/:id', async (req, res) => {
+router.delete('/delete/:id', auth, async (req, res) => {
     //const id = req.params.id; // Extract id from request parameters
     
     pool.query('DELETE FROM task WHERE id = $1',
