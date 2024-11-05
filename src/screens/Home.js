@@ -2,16 +2,30 @@ import { useState } from 'react';
 import './Home.css';
 
 function Home() {
+  const { user } = useUser();
   const [task, setTask] = useState('')
   const [tasks, setTasks] = useState([])
+
   const addTask = () => {
+    const headers = {headers; {Authorization: user.token}};
+
+    axios.post(url + '/create', {
+      description: task
+    }, headers)
+    .then(response => {
     setTasks([...tasks, task])
     setTask('')
-  }
-  const deleteTask = (deleted) => {
-    const withoutRemoved = tasks.filter((item) => item !== deleted)
-    setTasks(withoutRemoved)
-  }
+    }); //error handling?
+
+  const deleteTask = (id) => {
+    const headers = {headers; {Authorization: user.token}};
+    axios.delete(url + '/delete/' + id, headers)
+    .then(response => {
+      const withoutRemoved = tasks.filter((item) => item !== id)
+      setTasks(withoutRemoved)
+    }); //error handling?
+    }
+    
   return (
    <div id ="container">
      <h3>ToDos</h3>
