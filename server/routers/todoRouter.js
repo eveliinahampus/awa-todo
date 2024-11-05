@@ -1,5 +1,5 @@
 import { pool } from '../helpers/db.js';
-import e, { Router } from 'express';
+import { Router } from 'express';
 import { auth } from '../helpers/auth.js';
 
 const router = Router();

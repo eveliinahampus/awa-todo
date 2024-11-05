@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import './App.css';
+import './Home.css';
 
-function App() {
+function Home() {
   const [task, setTask] = useState('')
   const [tasks, setTasks] = useState([])
   const addTask = () => {
@@ -42,4 +42,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;

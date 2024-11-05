@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './App.css';
+import './Home.css';
 import axios from 'axios';
 
 const url = 'http://localhost:3001/';
