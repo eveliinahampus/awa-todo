@@ -7,7 +7,7 @@ function Home() {
   const [tasks, setTasks] = useState([])
 
   const addTask = () => {
-    const headers = {headers; {Authorization: user.token}};
+    const headers = {headers: {Authorization: user.token}};
 
     axios.post(url + '/create', {
       description: task
@@ -18,14 +18,14 @@ function Home() {
     }); //error handling?
 
   const deleteTask = (id) => {
-    const headers = {headers; {Authorization: user.token}};
+    const headers = {headers: {Authorization: user.token}};
     axios.delete(url + '/delete/' + id, headers)
     .then(response => {
       const withoutRemoved = tasks.filter((item) => item !== id)
       setTasks(withoutRemoved)
     }); //error handling?
     }
-    
+
   return (
    <div id ="container">
      <h3>ToDos</h3>
@@ -54,6 +54,8 @@ function Home() {
      </ul>
    </div>
   );
+  }
+
 }
 
 export default Home;
