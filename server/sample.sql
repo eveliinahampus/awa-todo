@@ -20,3 +20,5 @@ INSERT INTO account (email, password) VALUES ('eve@gmail.com', 'todo123');
 psql -h localhost -U postgres -d todo
 psql -h localhost -U postgres -d test_todo
 
+DELETE FROM account WHERE id='{insert row}';
+

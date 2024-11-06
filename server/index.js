@@ -1,15 +1,19 @@
 import express from 'express';
 import cors from 'cors';
-import pool from './helpers/db.js';
 import todoRouter from './routers/todoRouter.js';
 import userRouter from './routers/userRouter.js';
+import dotenv from 'dotenv';
+import { pool } from './helpers/db.js';
+
 
 dotenv.config();
+const environment = process.env.NODE_ENV
 
 const port = process.env.PORT 
 
 const app = express();
 app.use(cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
