@@ -3,8 +3,6 @@ import cors from 'cors';
 import todoRouter from './routers/todoRouter.js';
 import userRouter from './routers/userRouter.js';
 import dotenv from 'dotenv';
-import { pool } from './helpers/db.js';
-
 
 dotenv.config();
 const environment = process.env.NODE_ENV

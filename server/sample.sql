@@ -22,3 +22,7 @@ psql -h localhost -U postgres -d test_todo
 
 DELETE FROM account WHERE id='{insert row}';
 
+CREATE database todo;
+
+CREATE database test_todo;
+
