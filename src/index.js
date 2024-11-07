@@ -6,6 +6,8 @@ import ErrorPage from "./screens/ErrorPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ProtectedRoute from './components/ProtectedRoute';
 import UserProvider from './context/UserProvider';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 const router = createBrowserRouter([
   {
@@ -16,11 +18,10 @@ const router = createBrowserRouter([
     element: <Authentication authenticationMode={AuthenticationMode.Login} />,
   },
   {
-    path: "/register",
+    path: "/signup",
     element: <Authentication authenticationMode={AuthenticationMode.Register} />,
   },
   {
-    path: "/protected",
     element: <ProtectedRoute />,
     children: [
       {
@@ -42,7 +43,7 @@ root.render(
 
 
 
-//const url = 'http://localhost:3001/';
+const url = 'http://localhost:3001/';
 
 function App() {
   const [task, setTask] = useState('')
@@ -55,7 +56,7 @@ function App() {
       }).catch(error => {
         alert(error.response.data.error ? error.response.data.error : error)
       })
-    }, []),
+    }, []);
 
     <ul>
       {

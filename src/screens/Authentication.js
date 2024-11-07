@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import './Authentication.css';
 import React from 'react';
-import useUser from '../context/useUser';
+import { useUser } from '../context/useUser';
 
 export const AuthenticationMode = Object.freeze({
     Login: 'Login',
@@ -22,8 +22,10 @@ export default function Authentication({ authenticationMode }) {
             }
             navigate('/');
         }
+
         catch (error) {
-            const message = error.response && error.response.data ? error.response.data.error : alert(message);
+            const message = error.response && error.response.data ? error.response.data.error : "Unknown error";
+            alert(message);
         }
     };
 

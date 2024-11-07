@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import './Home.css';
+import axios from 'axios';
+import { useUser } from '../context/useUser';
+
+const url = 'http://localhost:3001/';
 
 function Home() {
-  const { user } = useUser();
+  const { user } = useUser
   const [task, setTask] = useState('')
   const [tasks, setTasks] = useState([])
 
