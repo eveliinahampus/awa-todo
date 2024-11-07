@@ -16,7 +16,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/', todoRouter);
+app.use('/create', todoRouter);
 app.use('/user', userRouter);
+app.use('/register', userRouter);
+app.use('/login', userRouter);
+app.use('/delete', userRouter);
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;

@@ -41,7 +41,7 @@ describe('POST Task', () => {
     });
 
     it('should not post a task without description', async () => {
-        const response = await fetch(base_url + '/create', {
+        const response = await fetch(base_url + 'create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ describe('POST Task', () => {
     });
 
     it('should not post a task with zero length description', async () => {
-        const response = await fetch(base_url + '/create', {
+        const response = await fetch(base_url + 'create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ describe('POST register', () => {
     const email = 'register@foo@com'
     const password = 'register123'
     it('should register with valid email and password', async() => {
-        const response = await fetch(base_url + '/user/register', {
+        const response = await fetch(base_url + 'user/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -125,7 +125,7 @@ describe('POST register', () => {
     it ('should not post a user with less than 8 character password', async () => {
         const email = 'register@foo.com'
         const password = 'short1'
-        const response = await fetch(base_url + '/user/register', {
+        const response = await fetch(base_url + 'user/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -143,12 +143,13 @@ describe('POST register', () => {
     });
 });
 
+// INSERT TEST USER
 describe('POST login', () => {
     const email = 'login@foo@com'
     const password = 'login123'
     insertTestUser(email, password)
     it('should login with credentials', async() => {
-        const response = await fetch(base_url + '/user/login', {
+        const response = await fetch(base_url + 'user/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

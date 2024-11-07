@@ -23,4 +23,4 @@ const postTasks = async (req, res, next) => {
         }
 };
 
-export { getTasks };
+export { getTasks, postTasks };

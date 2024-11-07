@@ -8,6 +8,7 @@ const router = Router();
 router.get('/', async (req, res) => {
     pool.query('SELECT * FROM task', (error, result) => {
         if (error) {
+            console.log(error);
             return res.status(500).json({ error: error.message });
             }
             return res.status(200).json(result.rows);
