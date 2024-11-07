@@ -14,7 +14,7 @@ router.post('/register', async (req, res, next) => {
                 [req.body.email, hashedPassword], 
                 (error, result) => {
                     if (error) next (error) //database error
-                    return res.status(201).json({ id: result.rows[0].id, email: result.rows[0].email, password: result.rows[0].password })
+                    return res.status(201).json({ id: result.rows[0].id, email: result.rows[0].email })
                     }
                 )
                 }catch (error) {
@@ -22,7 +22,7 @@ router.post('/register', async (req, res, next) => {
         }
         })
         });
-        
+
 router.post('/login', async (req, res, next) => {
     const invalid_message = 'Invalid credentials'
     try {

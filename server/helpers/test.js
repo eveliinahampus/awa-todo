@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { pool } from './db.js';
-import { hash, sign } from 'crypto';
+import { hash, sign } from 'bcrypt';
 
 const __dirname = import.meta.dirname;
 
