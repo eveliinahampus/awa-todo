@@ -20,11 +20,13 @@ router.post('/create', auth, async (req, res, next) => {
                 [req.body.description],
                 (error, result) => {
                     if (error) {
-                        return res.status(500).json({ error: error.message });
+                        return next(error)
                         }
                         return res.status(200).json(result.rows);
                     });
-        });
+                });
+
+            
 
 router.delete('/delete/:id', auth, async (req, res, next) => {
     //const id = req.params.id; // Extract id from request parameters
@@ -33,7 +35,7 @@ router.delete('/delete/:id', auth, async (req, res, next) => {
         [id],
         (error, result) => {
             if (error) {
-                return res.status(500).json({ error: error.message });
+                return next(error)
                 }
                 return res.status(200).json(result.rows);
             });

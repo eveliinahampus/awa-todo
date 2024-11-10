@@ -8,12 +8,14 @@ export const AuthenticationMode = Object.freeze({
     Register: 'Register',
 });
 
+console.log(AuthenticationMode)
+
 export default function Authentication({ authenticationMode }) {
     const { user, setUser, signUp, signIn } = useUser();
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async (event) => {
+        event.preventDefault();
         try {
             if (authenticationMode === AuthenticationMode.Register) {
                 await signUp();
@@ -24,8 +26,8 @@ export default function Authentication({ authenticationMode }) {
         }
 
         catch (error) {
-            const message = error.response && error.response.data ? error.response.data.error : "Unknown error";
-            alert(message);
+            const message = error.response && error.response.data ? error.response.data.error : "Unknown error. Please try again."; 
+            console.log(message);
         }
     };
 

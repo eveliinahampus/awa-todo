@@ -9,10 +9,12 @@ export default function UserProvider({ children }) {
     const [user, setUser] = useState(userFromSessionStorage ? JSON.parse(userFromSessionStorage) : {email: '', password: ''});
 
     const signUp = async () => {
-        const json = JSON.stringify(user);
+        //const json = JSON.stringify(user);
+        const data = user; // Axios does not need JSON.stringify
         const headers = {headers: {'Content-Type': 'application/json'}};
         try {
-            const response = await axios.post(url + '/user/register', json, headers);
+            //const response = await axios.post(url + '/user/register', json, headers);
+            const response = await axios.post(url + '/user/register', data, headers);
             setUser(response.data);
             sessionStorage.setItem('user', JSON.stringify(response.data));
         } catch (error) {
@@ -21,13 +23,15 @@ export default function UserProvider({ children }) {
     }
 
   const signIn = async () => {
-    const json = JSON.stringify(user);
+    //const json = JSON.stringify(user);
+    const data = user; // Axios does not need JSON.stringify
     const headers = {headers: {'Content-Type': 'application/json'}};
     try {
-      const response = await axios.post(url + '/user/login', json, headers);
+      //const response = await axios.post(url + '/user/login', json, headers);
+      const response = await axios.post(url + '/user/login', data, headers);
       const token = response.data.token;
       setUser(response.data);
-      sessionStorage.setItem('user', JSON.stringify(response.data));
+      sessionStorage.setItem('user', JSON.stringify(response.data), token);
     } catch (error) {
       throw error;
     }

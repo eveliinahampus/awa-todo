@@ -7,10 +7,10 @@ const { sign } = jwt;
 const router = Router();
 
 router.post('/register', async (req, res, next) => {
-    hash(req.body.password, 10, async (error, hashedPassword) => {
+    bcrypt.hash(req.body.password, 10, async (error, hashedPassword) => {
         if (error) next (error) //hash error
         try {
-            pool.query('INSERT INTO account (email, password) VALUES ($1, $2)', 
+            await pool.query('INSERT INTO account (email, password) VALUES ($1, $2)', 
                 [req.body.email, hashedPassword], 
                 (error, result) => {
                     if (error) next (error) //database error
@@ -23,7 +23,7 @@ router.post('/register', async (req, res, next) => {
         })
         });
 
-router.post('/login', async (req, res, next) => {
+router.post('/login',  async (req, res, next) => {
     const invalid_message = 'Invalid credentials'
     try {
         pool.query('SELECT * FROM account WHERE email = $1',
@@ -46,7 +46,7 @@ router.post('/login', async (req, res, next) => {
                 })
         }catch (error) {
             return next(error)
-        }
+        } 
     });
 
     export default router;

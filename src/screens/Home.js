@@ -3,7 +3,7 @@ import './Home.css';
 import axios from 'axios';
 import { useUser } from '../context/useUser';
 
-const url = 'http://localhost:3001/';
+const url = process.env.REACT_APP_API_URL;
 
 function Home() {
   const { user } = useUser

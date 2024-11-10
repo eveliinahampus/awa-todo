@@ -10,7 +10,8 @@ dotenv.config();
 const port = process.env.PORT 
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: 'http://localhost:3002' })); // frontend is served from port 3002
+app.use(express.json()); // Parse JSON request bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
